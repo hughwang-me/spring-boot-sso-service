@@ -1,0 +1,6 @@
+server:
+  port: 8090
+spring:
+  security:
+    ignores: "/test1/**,/test2/**"
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.uwjx</groupId>
+        <artifactId>spring-boot-sso-service</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>spring-security-oauth2-oss</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>spring-security-oauth2-oss</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <modules>
+        <module>spring-security-oauth2-oss-auth-server</module>
+        <module>spring-security-oauth2-oss-resource1</module>
+        <module>spring-security-oauth2-oss-resource2</module>
+        <module>spring-security-oauth2-oss-resource3</module>
+    </modules>
+
+    <dependencies>
+
+    </dependencies>
+
+
+</project>
