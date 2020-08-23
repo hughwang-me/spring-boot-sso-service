@@ -1,10 +1,7 @@
 package com.uwjx.springsecurity.configuration;
 
 import com.alibaba.fastjson.JSON;
-import com.uwjx.springsecurity.security.LogFilter;
-import com.uwjx.springsecurity.security.MyAuthenticationFailureHandler;
-import com.uwjx.springsecurity.security.MyAuthenticationSuccessHandler;
-import com.uwjx.springsecurity.security.MyUsernamePasswordAuthenticationFilter;
+import com.uwjx.springsecurity.security.*;
 import com.uwjx.springsecurity.service.MyUserDetailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,22 +37,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        return super.authenticationManagerBean();
 //    }
 
+    @Autowired
+    MyAccessDeniedHandler myAccessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         log.warn("加载 访问控制 配制");
 
-            http.csrf().disable()
+        http.csrf().disable()
+                .exceptionHandling()
+                .accessDeniedHandler(myAccessDeniedHandler)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/test1/**").permitAll() //添加 test1 访问放行
 //                .antMatchers("/account/**").permitAll()
                 .anyRequest().authenticated()
+
 //                .and().formLogin()
 //                .and().formLogin().loginProcessingUrl("/account/login")
 //                .and().formLogin().disable()
 //        .and().e
-                ;
-        http.addFilterAt(myUsernamePasswordAuthenticationFilter() , UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(logFilter , UsernamePasswordAuthenticationFilter.class);
+        ;
+        http.addFilterAt(myUsernamePasswordAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(logFilter, UsernamePasswordAuthenticationFilter.class);
 //        http.csrf().disable();//关闭csrf 允许POST PUT DELETE 等
 
     }

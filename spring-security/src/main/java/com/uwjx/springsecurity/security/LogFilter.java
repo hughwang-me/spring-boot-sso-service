@@ -19,7 +19,11 @@ public class LogFilter extends OncePerRequestFilter {
                                     HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
         logger.warn("LogFilter 执行");
-        filterChain.doFilter(httpServletRequest , httpServletResponse);
+        try {
+            filterChain.doFilter(httpServletRequest , httpServletResponse);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

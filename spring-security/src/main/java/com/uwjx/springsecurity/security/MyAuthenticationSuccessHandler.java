@@ -20,9 +20,9 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.warn("登录成功 onAuthenticationSuccess 1");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter printWriter = response.getWriter();
-        printWriter.write(authentication.getPrincipal().toString());
+        printWriter.write("登录成功1:" + authentication.getPrincipal());
         printWriter.flush();
         printWriter.close();
     }
@@ -30,9 +30,9 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         log.warn("登录成功 onAuthenticationSuccess 2");
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setContentType("application/json;charset=UTF-8");
         PrintWriter printWriter = response.getWriter();
-        printWriter.write(authentication.getPrincipal().toString());
+        printWriter.write("登录成功2:" + authentication.getPrincipal());
         printWriter.flush();
         printWriter.close();
     }
