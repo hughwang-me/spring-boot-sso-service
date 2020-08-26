@@ -45,13 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         log.warn("加载 访问控制 配制");
 
         http.csrf().disable()
-                .exceptionHandling()
-                .accessDeniedHandler(myAccessDeniedHandler)
-                .and()
+
                 .authorizeRequests()
                 .antMatchers("/test1/**").permitAll() //添加 test1 访问放行
 //                .antMatchers("/account/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(myAccessDeniedHandler)
 
 //                .and().formLogin()
 //                .and().formLogin().loginProcessingUrl("/account/login")

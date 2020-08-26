@@ -21,16 +21,17 @@ public class CookieController {
     @RequestMapping(value = "addCookie")
     public String addCookie(HttpServletRequest request , HttpServletResponse response){
 
-        Cookie cookie = new Cookie("token" ,"token11111111111111");
-        cookie.setMaxAge(10);
+        Cookie cookie = new Cookie("token1" ,"token11111111111111");
+        cookie.setDomain("a.com");
+        cookie.setMaxAge(-1);
 
         Cookie cookie2 = new Cookie("token2" ,"token22222222");
-        cookie2.setDomain("wanghuan.com");
+        cookie2.setDomain("b.com");
         cookie2.setMaxAge(-1);
 
         Cookie cookie3 = new Cookie("token3" ,"token33333333");
-        cookie3.setDomain("wanghuan.com");
-        cookie3.setMaxAge(20);
+        cookie3.setDomain("c.com");
+        cookie3.setMaxAge(-1);
 
 //        cookie.setDomain();
         response.addCookie(cookie);
