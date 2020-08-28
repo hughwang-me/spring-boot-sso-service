@@ -1,13 +1,13 @@
 server:
   port: 8081
-auth-server: http://localhost:8090/ # sso-serverµØÖ·
-security:
-  oauth2:
-    client:
-      client-id: client-01
-      client-secret: 12345678
-      user-authorization-uri: ${auth-server}/oauth/authorize #ÇëÇóÈÏÖ¤µÄµØÖ·
-      access-token-uri: ${auth-server}/oauth/token #ÇëÇóÁîÅÆµÄµØÖ·
-    resource:
-      jwt:
-        key-uri: ${auth-server}/oauth/token_key #½âÎöjwtÁîÅÆËùĞèÒªÃÜÔ¿µÄµØÖ·
+#auth-server: http://localhost:8090/ # sso-serverï¿½ï¿½Ö·
+#security:
+#  oauth2:
+#    client:
+#      client-id: client-01
+#      client-secret: 12345678
+#      user-authorization-uri: ${auth-server}/oauth/authorize #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Äµï¿½Ö·
+#      access-token-uri: ${auth-server}/oauth/token #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆµÄµï¿½Ö·
+#    resource:
+#      jwt:
+#        key-uri: ${auth-server}/oauth/token_key #ï¿½ï¿½ï¿½ï¿½jwtï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ô¿ï¿½Äµï¿½Ö·

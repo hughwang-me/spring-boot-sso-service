@@ -16,43 +16,19 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Slf4j
 public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory() .withClient("client-01")
-//                .resourceIds(DEMO_RESOURCE_ID)
-                .authorizedGrantTypes("password", "refresh_token")
-                .scopes("select")
-                .authorities("client")
-                .secret("12345678")
-//        clients.inMemory()
-//                .withClient("client-01")
-//                .secret("12345678")
-//                .authorizedGrantTypes("authorization_code", "refresh_token")
-//                .scopes("all","read","write")
-//                .autoApprove(true)
-                .and()
-                .withClient("client-02")
-                .secret("12345678")
-                .authorizedGrantTypes("authorization_code", "refresh_token")
-                .scopes("all","read","write")
-                .autoApprove(true);
+        clients.inMemory()
+                .withClient("client01")
+                .secret("12345")
+                .authorizedGrantTypes("authorization_code")
+                .scopes("all")
+                .redirectUris("http://localhost:8081/account/callback");
     }
+//
+//    @Override
+//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+//        security.tokenKeyAccess("isAuthenticated()");
+//    }
 
-    /**
-     * 采用 password 授权模式 必须要提供 authenticationManager
-     */
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints
-                .tokenStore(new InMemoryTokenStore())
-                .authenticationManager(authenticationManager);
-    }
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("isAuthenticated()");
-    }
 }

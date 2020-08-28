@@ -44,27 +44,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/authentication/login")
-                .loginProcessingUrl("/authentication/form")
-                .and().authorizeRequests()
-                .antMatchers("/authentication/login",
-                        "/authentication/form",
-                        "/**/*.js",
-                        "/**/*.css",
-                        "/**/*.jpg",
-                        "/**/*.png",
-                        "/**/*.woff2"
-                )
-                .permitAll()
+        http.csrf().disable()
+                .authorizeRequests()
+//                .antMatchers("/oauth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .csrf().disable();
+                .formLogin().permitAll();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        AuthenticationManager manager = super.authenticationManagerBean();
-        return manager;
-    }
+//    @Bean
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        AuthenticationManager manager = super.authenticationManagerBean();
+//        return manager;
+//    }
 }
