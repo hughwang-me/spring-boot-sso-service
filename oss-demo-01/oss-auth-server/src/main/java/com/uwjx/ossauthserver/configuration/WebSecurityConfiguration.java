@@ -1,6 +1,8 @@
 package com.uwjx.ossauthserver.configuration;
 
+import com.uwjx.ossauthserver.handler.UwjxLogoutSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +23,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @SuppressWarnings("deprecation")
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -42,14 +44,27 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .withUser("wanghuan").password("123456").roles("USER");
 //    }
 
+    @Autowired
+    UwjxLogoutSuccessHandler logoutSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests()
-//                .antMatchers("/oauth/**").permitAll()
-                .anyRequest().authenticated()
+                .formLogin()
+                    .loginPage("/auth/union-login")
+                    .loginProcessingUrl("/union-login-process")
+                    .usernameParameter("user_name")
+                    .passwordParameter("pass_word")
                 .and()
-                .formLogin().permitAll();
+                .logout()
+                    .logoutUrl("/ilogout")
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                    .deleteCookies("JSESSIONID")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/union-login").permitAll()
+                .antMatchers("/15.png", "/test.html").permitAll()
+                .anyRequest().authenticated();
     }
 
 //    @Bean

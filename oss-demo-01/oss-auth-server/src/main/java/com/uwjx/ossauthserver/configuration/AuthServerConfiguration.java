@@ -23,12 +23,13 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
                 .secret("12345")
                 .authorizedGrantTypes("authorization_code")
                 .scopes("all")
-                .redirectUris("http://localhost:8081/account/callback");
+                .autoApprove(true)
+                .redirectUris("http://localhost:8081/account/callback" , "http://www.baidu.com");
     }
-//
-//    @Override
-//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-//        security.tokenKeyAccess("isAuthenticated()");
-//    }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("isAuthenticated()");
+    }
 
 }

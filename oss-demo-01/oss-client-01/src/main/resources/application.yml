@@ -10,4 +10,9 @@ server:
 #      access-token-uri: ${auth-server}/oauth/token #�������Ƶĵ�ַ
 #    resource:
 #      jwt:
+
 #        key-uri: ${auth-server}/oauth/token_key #����jwt��������Ҫ��Կ�ĵ�ַ
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
