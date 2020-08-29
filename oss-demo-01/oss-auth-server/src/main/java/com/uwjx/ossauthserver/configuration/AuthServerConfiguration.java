@@ -23,7 +23,7 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
                 .secret("12345")
                 .authorizedGrantTypes("authorization_code")
                 .scopes("all")
-                .autoApprove(true)
+//                .autoApprove(true)
                 .redirectUris("http://localhost:8081/account/callback" , "http://www.baidu.com");
     }
 

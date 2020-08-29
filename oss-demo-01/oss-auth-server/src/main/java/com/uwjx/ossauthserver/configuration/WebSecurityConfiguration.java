@@ -1,5 +1,6 @@
 package com.uwjx.ossauthserver.configuration;
 
+import com.uwjx.ossauthserver.handler.LoginAuthenticationSuccessHandler;
 import com.uwjx.ossauthserver.handler.UwjxLogoutSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,15 +47,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UwjxLogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .formLogin()
-                    .loginPage("/auth/union-login")
+                    .loginPage("/login_handler")
                     .loginProcessingUrl("/union-login-process")
                     .usernameParameter("user_name")
                     .passwordParameter("pass_word")
+                    .successHandler(loginAuthenticationSuccessHandler)
                 .and()
                 .logout()
                     .logoutUrl("/ilogout")
@@ -62,7 +66,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/union-login").permitAll()
+                .antMatchers("/auth/union-login.html" , "/login_handler" , "/oauth/**").permitAll()
                 .antMatchers("/15.png", "/test.html").permitAll()
                 .anyRequest().authenticated();
     }

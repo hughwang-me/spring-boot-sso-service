@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "auth")
 public class AuthController {
 
-    @RequestMapping("union-login")
+    @RequestMapping("union-login.html")
     public String login() {
         log.warn("加载统一登录页面");
         return "union-login";
